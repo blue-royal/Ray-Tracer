@@ -63,9 +63,14 @@ class Vec3():
     def magnitude(self):
         return ((self.x**2)+(self.y**2)+(self.z**2))**0.5
     
+    def dot(self, other):
+        return (self.x * other.x) + (self.y * other.y) + (self.z * other.z)
+    
+    def cross(self, other):
+        return Vec3((self.y*other.z)-(self.z*other.y), (self.z*other.x)-(self.x*other.z), (self.x*other.y)-(self.y*other.z))
     
     def __add__(self, other):
-        return Vec2(self.x + other.x, self.y + other.y, self.z + other.z)
+        return Vec3(self.x + other.x, self.y + other.y, self.z + other.z)
     
     def __iadd__(self, other):
         self.x += other.x
@@ -74,7 +79,7 @@ class Vec3():
         return self
     
     def __sub__(self, other):
-        return Vec2(self.x - other.x, self.y - other.y, self.z - other.z)
+        return Vec3(self.x - other.x, self.y - other.y, self.z - other.z)
     
     def __isub__(self, other):
         self.x -= other.x
@@ -83,12 +88,12 @@ class Vec3():
         return self
     
     def __mul__(self, other):
-        return Vec2(self.x*other.x, self.y*other.y, self.z*other.z)
+        return Vec3(self.x*other, self.y*other, self.z*other)
     
     def __imul__(self, other):
-        self.x *= other.x
-        self.y *= other.y
-        self.z *= other.z
+        self.x *= other
+        self.y *= other
+        self.z *= other
         return self
     
     def __repr__(self):

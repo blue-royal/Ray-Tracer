@@ -1,6 +1,7 @@
+from math import tan
 from PIL import Image
 from colour import *
-from random import randrange
+from ray import *
 
 class Render:
     defaultName = 1
@@ -24,13 +25,20 @@ class Render:
     def show(self):
         self.image.show()
 
+
 class Grid:
     def __init__(self):
-        self.width = 0
-        self.height = 0
+        self.size = 400
+        self.grid = [[Colour(0, 0, 0) for i in range(self.size)] for j in range(self.size)]
+        FOV = pi/8
+        start = tan(FOV/2)
+        step = start/(self.size/2)
+        for i, col in enumerate(self.grid):
+            print(f"Row {i} complete")
+            for j in range(len(col)):
+                pixelPos = Vec3(-start, start, 0) + Vec3(step*i, step*-j, 0)
+                self.grid[i][j] = Ray(pixelPos, pixelPos-Vec3(0, 0, -1)).colour
+                
         
-        
-img = Render("newTest", [[Colour(randrange(0, 255), randrange(0, 255), randrange(0, 255)) for i in range(500)] for j in range(500)])
-img.export()
-img.show()
+
     

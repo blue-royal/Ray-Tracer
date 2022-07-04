@@ -2,8 +2,8 @@ from pygame import Color
 from vec import Vec3
 
 class Colour(Vec3):
-    def __init__(self, x, y, z):
-        super().__init__(x, y, z)
+    def __init__(self, r, g, b):
+        super().__init__(int(r), int(g), int(b))
     
     def mod(self):
         self.x %= 255
@@ -18,6 +18,12 @@ class Colour(Vec3):
         
     def get(self):
         return (self.z, self.y, self.z)
+    
+    def __mul__(self, other):
+        return Colour(self.x*other, self.y*other, self.z*other)
+
+    def __add__(self, other):
+        return Colour(self.x + other.x, self.y + other.y, self.z + other.z)
     
     @staticmethod
     def clampNum(num, min, max):
