@@ -1,4 +1,6 @@
 from render import *
-img = Render("newTest", Grid().grid)
+
+img = Render("newImage")
 img.export()
 img.show()
+
